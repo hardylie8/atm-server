@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -24,6 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'id',
         'name',
         'password',
+        'saldo',
     ];
 
     /**
@@ -53,5 +56,16 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Model relationship definition.
+     * User belongs to many TransactionHistory
+     *
+     * @return BelongsToMany
+     */
+    public function TransactionHistory(): HasMany
+    {
+        return $this->hasMany(TransactionHistory::class, 'user_id');
     }
 }
