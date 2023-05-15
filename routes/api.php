@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionHistoryController;
 use App\Http\Controllers\transferController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\withdrawalController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::post('/withdraw', [withdrawalController::class, 'index']);
 Route::post('/transfer', [transferController::class, 'index']);
 Route::get('/transaction_histories', [TransactionHistoryController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
+Route::put('/user', [UserController::class, 'update']);
